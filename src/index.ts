@@ -129,7 +129,6 @@ export default function createTransformer() {
       if (!ts.isImportDeclaration(node)) {
         return node;
       }
-      const importedLibName = (<ts.StringLiteral>node.moduleSpecifier).text;
       const structs = getImportedStructs(node);
       if (structs.size === 0) {
         return node;
