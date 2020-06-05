@@ -1,0 +1,17 @@
+{
+  "name": "@bigmogician/ts-import-plugin-zent",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "https://github.com/miao17game/ts-import-plugin-zent.git",
+  "author": "bigmogician <sunaoran@youzan.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^14.0.11",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.5"
+  }
+}
