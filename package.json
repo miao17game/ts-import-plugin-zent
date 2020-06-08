@@ -1,7 +1,8 @@
 {
   "name": "@bigmogician/ts-import-plugin-zent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": "https://github.com/miao17game/ts-import-plugin-zent.git",
   "author": "bigmogician <sunaoran@youzan.com>",
   "license": "MIT",

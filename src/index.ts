@@ -129,6 +129,11 @@ export default function createTransformer() {
       if (!ts.isImportDeclaration(node)) {
         return node;
       }
+      const importedLibName =
+        ts.isStringLiteral(node.moduleSpecifier) && node.moduleSpecifier.text;
+      if (importedLibName !== "zent") {
+        return node;
+      }
       const structs = getImportedStructs(node);
       if (structs.size === 0) {
         return node;
