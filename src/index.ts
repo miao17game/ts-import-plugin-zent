@@ -79,6 +79,7 @@ function createDistAst(
     throw new Error("get zent module mapping file failed.");
   }
   const rule = MODULE_MAPPING[struct.importName];
+  if (!rule) return [];
   const importPath = getJavaScriptPath(rule.js, libraryName);
   const scriptNode = ts.createImportDeclaration(
     undefined,
