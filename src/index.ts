@@ -92,11 +92,11 @@ function createDistAst(
         ? ts.createNamedImports([
             ts.createImportSpecifier(
               !struct.variableName
-                ? ts.createIdentifier(struct.importName)
-                : void 0,
+                ? void 0
+                : ts.createIdentifier(struct.importName),
               !struct.variableName
-                ? ts.createIdentifier(struct.variableName!)
-                : ts.createIdentifier(struct.importName)
+                ? ts.createIdentifier(struct.importName)
+                : ts.createIdentifier(struct.variableName)
             ),
           ])
         : undefined
