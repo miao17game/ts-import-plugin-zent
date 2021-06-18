@@ -121,7 +121,7 @@ function createDistAst(
   return astNodes;
 }
 
-export default function createTransformer() {
+export default function createTransformer(packageName: string = "zent") {
   return (context: ts.TransformationContext) => {
     const visitor: ts.Visitor = (node) => {
       if (ts.isSourceFile(node)) {
@@ -132,7 +132,7 @@ export default function createTransformer() {
       }
       const importedLibName =
         ts.isStringLiteral(node.moduleSpecifier) && node.moduleSpecifier.text;
-      if (importedLibName !== "zent") {
+      if (importedLibName !== packageName) {
         return node;
       }
       const structs = getImportedStructs(node);
@@ -142,7 +142,7 @@ export default function createTransformer() {
       const css: Record<string, boolean> = {};
       return Array.from(structs).reduce((acc, struct) => {
         const nodes = createDistAst(struct, {
-          libraryName: "zent",
+          libraryName: <"zent">packageName,
           libraryDirectory: "es",
           css,
         });
