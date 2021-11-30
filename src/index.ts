@@ -79,14 +79,56 @@ function createDistAst(
     throw new Error("get zent module mapping file failed.");
   }
   const rule = MODULE_MAPPING[struct.importName];
+  // 特殊处理formulr，fuck
+  if (
+    [
+      "BasicModel",
+      "FieldArrayModel",
+      "FieldModel",
+      "FieldSetModel",
+      "FormStrategy",
+      "Validators",
+      "ValidatorMiddlewares",
+      "ValidateOption",
+      "FieldUtils",
+      "BasicBuilder",
+      "FieldArrayBuilder",
+      "FieldBuilder",
+      "FieldSetBuilder",
+      "FormBuilder",
+      "ValidatorContext",
+    ].includes(struct.importName)
+  ) {
+    const importPath = getJavaScriptPath("/form/formulr/index.js", libraryName);
+    const scriptNode = ts.createImportDeclaration(
+      void 0,
+      void 0,
+      ts.createImportClause(
+        void 0,
+        ts.createNamedImports([
+          ts.createImportSpecifier(
+            !struct.variableName
+              ? void 0
+              : ts.createIdentifier(struct.importName),
+            !struct.variableName
+              ? ts.createIdentifier(struct.importName)
+              : ts.createIdentifier(struct.variableName)
+          ),
+        ])
+      ),
+      ts.createLiteral(importPath)
+    );
+    astNodes.push(scriptNode);
+    return astNodes;
+  }
   if (!rule) return [];
   const importPath = getJavaScriptPath(rule.js, libraryName);
   const scriptNode = ts.createImportDeclaration(
-    undefined,
-    undefined,
+    void 0,
+    void 0,
     ts.createImportClause(
       !rule.isDefaultExport
-        ? undefined
+        ? void 0
         : ts.createIdentifier(struct.variableName || struct.importName),
       !rule.isDefaultExport
         ? ts.createNamedImports([
